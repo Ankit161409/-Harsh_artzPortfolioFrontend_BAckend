@@ -1,0 +1,1221 @@
+Gallery Wrapper
+.gallery-wrapper {
+  min-height: 100vh;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+
+
+/* Gallery Container */
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 2fr));
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+/* Flip Card */
+.flip-card {
+  width: 200px;
+  height: 300px;
+  perspective: 1000px;
+}
+
+/* Glass Card */
+.glass-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 350px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.glass-card:hover {
+  transform: scale(1.05) translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Card Image */
+.card-image,
+.card-image-container img {
+  width: 100%;
+  height:300px;
+  object-fit: cover;
+  margin: 0 0 15px 0;
+  transition: transform 0.6s ease;
+}
+
+.art-card:hover .card-image {
+  transform: scale(1.1);
+}
+
+/* Card Content */
+.card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  position: relative;
+}
+
+.card-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(45deg, #ffffff, #e2e8f0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.card-description {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  text-align: center;
+}
+
+/* Card Footer */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.artist-name {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.like-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #ff6b6b;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Buttons */
+.details-button,
+.view-details-btn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+.details-button:hover {
+  background-color: #5146c8;
+  transform: scale(1.05);
+}
+
+.view-details-btn {
+  background: linear-gradient(45deg, #a855f7, #06ffa5);
+  padding: 12px 28px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  box-shadow: 0 8px 25px rgba(168, 85, 247, 0.4);
+}
+
+/* Art Card */
+.art-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 24px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+}
+
+.art-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  border-radius: 24px 24px 0 0;
+}
+
+/* Image Overlay */
+.image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, rgba(0,0,0,0.7), rgba(168,85,247,0.3));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.art-card:hover .image-overlay {
+  opacity: 1;
+}
+.blue
+{
+  color:rgb(66, 153, 211);
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+  .gallery-container {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+  .gallery-wrapper {
+    padding: 1rem;
+  }
+  .card-content {
+    padding: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Loading Animation */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.art-card.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+/* Gallery Container */
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 cards per row */
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 0;
+}
+
+/* Card Content */
+.card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  position: relative;
+  color: black; /* text color changed to black */
+}
+
+/* Card Title */
+.card-title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  background: none; /* remove gradient background for better black text visibility */
+  -webkit-background-clip: unset;
+  -webkit-text-fill-color: black;
+  background-clip: unset;
+  color: black;
+}
+
+/* Card Description */
+.card-description {
+  color: black; /* text color changed to black */
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .gallery-container {
+    grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
+  }
+}
+
+@media (max-width: 900px) {
+  .gallery-container {
+    grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+  }
+}
+
+@media (max-width: 600px) {
+  .gallery-container {
+    grid-template-columns: 1fr; /* 1 card per row */
+  }
+}
+/* Default card shadow */
+.art-card,
+.glass-card {
+  box-shadow: 0 60px 90px rgba(0, 0, 2, 0.1); /* subtle default shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover card shadow */
+.art-card:hover,
+.glass-card:hover {
+  transform: translateY(-5px) scale(1.05); /* lift effect */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25); /* deeper shadow on hover */
+}
+
+/* Optional: Inner glow / accent on top */
+.art-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  border-radius: 24px 24px 0 0;
+  /* background: linear-gradient(90deg, rgba(168,85,247,0.6), rgba(6,255,165,0.6)); */
+}
+
+.top
+{
+  margin-top: 200px;;
+}
+
+/* ===================================================== */
+/* 3D PAINTING DETAILS - ULTRA LUXURY ART GALLERY STYLES */
+/* ===================================================== */
+
+:root {
+  --gallery-bg: #07080b;
+  --gallery-surface: #0f1118;
+  --gallery-gold: #d4af37;
+  --gallery-gold-glow: rgba(212, 175, 55, 0.4);
+  --gallery-gold-border: rgba(212, 175, 55, 0.28);
+  --text-pure: #ffffff;
+  --text-dim: #9aa0b2;
+}
+
+.painting-details-3d-root {
+  min-height: 100vh;
+  background: radial-gradient(ellipse at 50% 15%, #151824 0%, #07080b 75%);
+  color: var(--text-pure);
+  position: relative;
+  overflow-x: hidden;
+  padding: 80px 24px 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Volumetric Museum Spotlight Beam */
+.details-spotlight-beam {
+  position: absolute;
+  top: 0;
+  left: 35%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 700px;
+  background: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.12) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.details-content-wrapper {
+  max-width: 1360px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 3;
+}
+
+.details-grid-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+/* 3D Artwork Stage & Canvas */
+.stage-3d-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.artwork-3d-viewport {
+  position: relative;
+  width: 100%;
+  max-width: 580px;
+  height: 680px;
+  cursor: grab;
+}
+
+.artwork-3d-viewport:active {
+  cursor: grabbing;
+}
+
+.artwork-3d-rig {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.frame-3d-exterior {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  background: #12141d;
+  padding: 14px;
+  box-sizing: border-box;
+  border: 1.5px solid var(--gallery-gold-border);
+  box-shadow: 0 35px 75px rgba(0, 0, 0, 0.92), 0 0 40px rgba(212, 175, 55, 0.12);
+  transform-style: preserve-3d;
+}
+
+.frame-gold-fillet {
+  position: absolute;
+  inset: 8px;
+  border: 1.5px solid rgba(212, 175, 55, 0.7);
+  border-radius: 14px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.canvas-3d-surface {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+.canvas-varnish-glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  transition: opacity 0.25s ease;
+}
+
+.floating-3d-badge {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  background: rgba(10, 12, 18, 0.85);
+  border: 1px solid var(--gallery-gold-border);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--gallery-gold);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 5;
+}
+
+.badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gallery-gold);
+  box-shadow: 0 0 8px var(--gallery-gold);
+}
+
+.frame-floor-shadow {
+  position: absolute;
+  bottom: -40px;
+  left: 10%;
+  width: 80%;
+  height: 30px;
+  background: radial-gradient(ellipse, rgba(0, 0, 0, 0.9) 0%, transparent 70%);
+  filter: blur(8px);
+  pointer-events: none;
+}
+
+/* 3D Tool Controls */
+.stage-controls-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 35px;
+  background: rgba(18, 20, 28, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 6px 14px;
+  border-radius: 999px;
+  backdrop-filter: blur(14px);
+}
+
+.tool-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.tool-btn:hover {
+  color: var(--text-pure);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.tool-btn.active {
+  background: rgba(212, 175, 55, 0.22);
+  border-color: var(--gallery-gold);
+  color: var(--gallery-gold);
+}
+
+.stage-hint {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.45);
+  margin-top: 14px;
+  letter-spacing: 0.3px;
+}
+
+/* 3D Details & Provenance Glass Card */
+.details-info-column {
+  width: 100%;
+}
+
+.info-3d-glass-card {
+  background: rgba(15, 18, 26, 0.78);
+  border: 1px solid var(--gallery-gold-border);
+  border-radius: 24px;
+  padding: 50px 45px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.info-3d-glass-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 20%;
+  right: 20%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gallery-gold), transparent);
+}
+
+.info-top-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.provenance-tag {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--gallery-gold);
+}
+
+.provenance-year {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.title-art-3d {
+  font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #ffffff 40%, #e8d5a8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0 0 20px;
+  line-height: 1.15;
+}
+
+.description-art-3d {
+  font-size: 1.12rem;
+  line-height: 1.85;
+  color: var(--text-dim);
+  margin: 0 0 34px;
+}
+
+/* Metadata Grid */
+.artwork-meta-box {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  padding: 22px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 40px;
+}
+
+.meta-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.98rem;
+}
+
+.meta-label { color: var(--text-dim); }
+.meta-value { color: #fff; font-weight: 600; }
+.meta-value.status-available { color: #2ecc71; }
+
+/* Action Buttons */
+.action-buttons-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+}
+
+.btn-back-3d {
+  padding: 15px 32px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-back-3d:hover {
+  background: rgba(255, 255, 255, 0.16);
+  border-color: #fff;
+}
+
+.btn-inquire-3d {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 15px 34px;
+  background: linear-gradient(135deg, #d4af37 0%, #b89327 100%);
+  color: #07080b;
+  font-size: 1rem;
+  font-weight: 800;
+  border-radius: 10px;
+  text-decoration: none;
+  box-shadow: 0 10px 25px rgba(212, 175, 55, 0.35);
+  transition: all 0.25s ease;
+}
+
+.btn-inquire-3d:hover {
+  box-shadow: 0 15px 35px rgba(212, 175, 55, 0.55);
+  transform: translateY(-2px);
+  color: #07080b;
+}
+
+/* Fullscreen Zoom Modal */
+.zoom-inspect-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 5, 8, 0.95);
+  backdrop-filter: blur(20px);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+}
+
+.zoom-modal-content {
+  position: relative;
+  max-width: 900px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.zoom-close-btn {
+  position: absolute;
+  top: -50px;
+  right: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.zoom-close-btn:hover {
+  background: #e74c3c;
+  border-color: #e74c3c;
+}
+
+.zoom-modal-img {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.95), 0 0 35px rgba(212, 175, 55, 0.2);
+}
+
+.zoom-modal-caption {
+  margin-top: 18px;
+  text-align: center;
+}
+
+.zoom-modal-caption h3 {
+  font-size: 1.6rem;
+  color: #fff;
+  margin: 0 0 4px;
+}
+
+.zoom-modal-caption p {
+  font-size: 0.9rem;
+  color: var(--gallery-gold);
+  margin: 0;
+}
+
+/* Not Found View */
+.painting-not-found-3d {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  color: #fff;
+  background: #07080b;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+  .details-grid-layout {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .artwork-3d-viewport {
+    height: 520px;
+  }
+
+  .info-3d-glass-card {
+    padding: 35px 28px;
+  }
+}
+
+@media (max-width: 768px) {
+  .painting-details-3d-root {
+    padding: 60px 16px 80px;
+  }
+
+  .artwork-3d-viewport {
+    height: 440px;
+  }
+
+  .title-art-3d {
+    font-size: 2.1rem;
+  }
+
+  .description-art-3d {
+    font-size: 1rem;
+  }
+
+  .action-buttons-group {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn-back-3d,
+  .btn-inquire-3d {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+/* 3D Scene Stage & Environment */
+.gallery-3d-scene {
+  min-height: 100vh;
+  background: radial-gradient(circle at 50% 10%, #171520 0%, #0c0a10 60%, #060508 100%);
+  color: #ffffff;
+  padding: 60px 30px 100px;
+  position: relative;
+  overflow-x: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Background Atmosphere */
+.ambient-glow {
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  filter: blur(140px);
+  pointer-events: none;
+  opacity: 0.25;
+  z-index: 0;
+}
+.glow-1 {
+  top: 5%;
+  left: 15%;
+  background: #a855f7;
+}
+.glow-2 {
+  top: 40%;
+  right: 10%;
+  background: #3b82f6;
+}
+
+/* Header */
+.gallery-header {
+  text-align: center;
+  margin-bottom: 60px;
+  position: relative;
+  z-index: 1;
+}
+.gallery-tagline {
+  letter-spacing: 4px;
+  font-size: 0.85rem;
+  color: #c084fc;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.gallery-heading {
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -1px;
+  background: linear-gradient(135deg, #ffffff 40%, #a855f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 3D Perspective Container Grid */
+.gallery-container-3d {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 40px;
+  max-width: 1300px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  /* Key 3D Perspective Setup */
+  perspective: 1200px;
+}
+
+/* Card 3D Wrapper */
+.card-3d-wrapper {
+  perspective: 1000px;
+}
+
+/* 3D Tilt Card */
+.art-card-3d {
+  position: relative;
+  background: rgba(26, 23, 36, 0.7);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 16px;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  will-change: transform;
+  box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.6),
+              0 0 0 1px rgba(255, 255, 255, 0.05);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.art-card-3d:hover {
+  box-shadow: 0 30px 60px -15px rgba(168, 85, 247, 0.25),
+              0 0 30px -5px rgba(168, 85, 247, 0.15);
+  border-color: rgba(168, 85, 247, 0.4);
+}
+
+/* Dynamic Specular Sheen */
+.card-glare {
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  pointer-events: none;
+  z-index: 10;
+  transition: opacity 0.3s ease;
+}
+
+/* 3D Elevated Image Layer */
+.card-image-container-3d {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  border-radius: 14px;
+  overflow: hidden;
+  /* Push image outward in 3D space */
+  transform: translateZ(35px);
+  transform-style: preserve-3d;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.card-image-3d {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.art-card-3d:hover .card-image-3d {
+  transform: scale(1.06);
+}
+
+/* Overlay & Button */
+.image-overlay-3d {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(12, 10, 16, 0.85) 0%, transparent 60%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 24px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.art-card-3d:hover .image-overlay-3d {
+  opacity: 1;
+}
+
+/* Floating Action Button (Pops further in Z-axis) */
+.view-details-btn-3d {
+  background: #ffffff;
+  color: #0c0a10;
+  padding: 10px 22px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  /* Highest 3D elevation */
+  transform: translateZ(50px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* 3D Elevated Content */
+.card-content-3d {
+  padding: 18px 8px 6px;
+  /* Middle 3D elevation */
+  transform: translateZ(25px);
+}
+
+.card-title-3d {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: #f1f5f9;
+  transition: color 0.3s ease;
+}
+
+.art-card-3d:hover .card-title-3d {
+  color: #c084fc;
+}
+
+.card-description-3d {
+  font-size: 0.9rem;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+/* Footer Details */
+.card-footer-3d {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 12px;
+}
+
+.artist-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #e2e8f0;
+}
+
+.artist-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #a855f7;
+  box-shadow: 0 0 8px #a855f7;
+}
+
+.artwork-index {
+  font-size: 0.8rem;
+  font-family: monospace;
+  color: #64748b;
+}
+
+/* Page Wrapper with Deep Space Background */
+.art-gallery-page {
+  position: relative;
+  min-height: 100vh;
+  background: radial-gradient(ellipse at 50% 0%, #0c081e 0%, #05030d 50%, #010005 100%);
+  color: #ffffff;
+  padding: 60px 24px 100px;
+  overflow-x: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Fullscreen Canvas for Twinkling Stars and Shooting Meteors */
+.starry-sky-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Prevents canvas from blocking mouse */
+  z-index: 1;
+}
+
+/* Cosmic Nebula Clouds */
+.nebula-cloud {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(150px);
+  pointer-events: none;
+  opacity: 0.22;
+  z-index: 0;
+}
+
+.nebula-purple {
+  top: 5%;
+  left: 15%;
+  width: 600px;
+  height: 600px;
+  background: #7c3aed;
+}
+
+.nebula-cyan {
+  top: 45%;
+  right: 10%;
+  width: 500px;
+  height: 500px;
+  background: #0284c7;
+}
+
+.nebula-pink {
+  bottom: 5%;
+  left: 30%;
+  width: 550px;
+  height: 550px;
+  background: #ec4899;
+  opacity: 0.15;
+}
+
+/* Header */
+.gallery-header-section {
+  text-align: center;
+  margin-bottom: 50px;
+  position: relative;
+  z-index: 2;
+}
+
+.sky-subtitle {
+  font-size: 0.85rem;
+  letter-spacing: 5px;
+  color: #c084fc;
+  font-weight: 600;
+  margin-bottom: 10px;
+  text-shadow: 0 0 12px rgba(192, 132, 252, 0.6);
+}
+
+.sky-title {
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin: 0;
+  background: linear-gradient(135deg, #ffffff 40%, #c084fc 80%, #60a5fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 20px rgba(192, 132, 252, 0.25));
+}
+
+/* Gallery Grid */
+.gallery-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 36px;
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* Stable, Shake-Free Glassmorphic Art Card */
+.art-card {
+  position: relative;
+  background: rgba(18, 14, 30, 0.7);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 22px;
+  padding: 16px;
+  cursor: pointer;
+  box-shadow: 0 15px 35px -10px rgba(0, 0, 0, 0.8);
+  /* Smooth color/glow transitions only — NO geometric jumping */
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Gentle, rock-steady glow on hover (NO scaling or jumping) */
+.art-card:hover {
+  background: rgba(26, 20, 42, 0.8);
+  border-color: rgba(192, 132, 252, 0.6);
+  box-shadow: 0 15px 40px -10px rgba(168, 85, 247, 0.35),
+              0 0 20px rgba(168, 85, 247, 0.15);
+}
+
+/* Image Container */
+.card-image-container {
+  position: relative;
+  width: 100%;
+  height: 290px;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #0d0b16;
+}
+
+/* Fixed Image (Removed the shaky transform scale) */
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+/* Image Overlay (Smooth Fade, No Jitter) */
+.image-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(8, 5, 15, 0.8) 0%, transparent 70%);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 22px;
+  opacity: 0;
+  pointer-events: none; /* Prevents cursor flicker */
+  transition: opacity 0.25s ease;
+}
+
+.art-card:hover .image-overlay {
+  opacity: 1;
+}
+
+/* Button */
+.view-details-btn {
+  background: #ffffff;
+  color: #0c081e;
+  padding: 10px 22px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 0.88rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+}
+
+/* Card Content */
+.card-content {
+  padding: 16px 6px 4px;
+}
+
+.card-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  color: #f8fafc;
+  transition: color 0.2s ease;
+}
+
+.art-card:hover .card-title {
+  color: #c084fc;
+}
+
+.card-description {
+  font-size: 0.88rem;
+  color: #94a3b8;
+  line-height: 1.5;
+  margin: 0 0 16px 0;
+}
+
+/* Card Footer */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 12px;
+}
+
+.artist-name {
+  font-size: 0.84rem;
+  color: #cbd5e1;
+  font-weight: 500;
+}
+
+.star-constellation-icon {
+  color: #c084fc;
+  font-size: 1rem;
+  text-shadow: 0 0 8px #c084fc;
+}
